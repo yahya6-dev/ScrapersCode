@@ -1,2 +1,2 @@
 # ScrapersCode
-Bunch of webcrawlers code in python using requests,selenium,scrapy and bs5
+Bunch of webcrawlers code in Python using Requests,Selenium,Scrapy and Bs4
