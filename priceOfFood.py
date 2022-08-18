@@ -9,8 +9,9 @@ def connect_db(**kargs):
 		raise ValueError("expected at least 3 argument")
 	try:
 		conn = connect(**kargs)
-	except:
-		return "failed to connect check connection paramaters"
+	except Exception as e:
+		print( "failed to connect check connection paramaters")
+		raise
 	else:
 		cursor = conn.cursor()
 	return conn,cursor

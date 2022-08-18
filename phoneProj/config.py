@@ -24,7 +24,7 @@ class Production(Config):
 	PASS = os.getenv("DB_PASS")
 	HOST = os.getenv("DB_HOST")
 	DB   = os.getenv("DB_NAME")
-
+	PRODUCTION = True
 	SQLALCHEMY_DATABASE_URI =  f"mysql://{USER}:{PASS}@{HOST}/{DB}"
 
 	@classmethod

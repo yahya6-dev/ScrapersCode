@@ -5,7 +5,7 @@ from scrapy.exceptions import CloseSpider
 import re
 from scrapy.shell import inspect_response
 from scrapy.settings import Settings
-
+from datetime import datetime
 class MyPipeline:
 	def __init__(self,db,user,passwd,host):
 		self.db = db
@@ -14,10 +14,11 @@ class MyPipeline:
 		self.host = host
 
 	def process_item(self,item,crawler):
+		TIME_STAMP = datetime.utcnow()
 		for phone_detail in item["output"]:
 			if phone_detail["price"]:
 				price,detail = phone_detail["price"],phone_detail["name"]
-				self.cursor.execute("insert into prices(phone,price) values(%s,%s)",[detail,price])
+				self.cursor.execute("insert into prices(phone,price,time_stamp) values(%s,%s,%s)",[re.sub("==","",detail),price,TIME_STAMP])
 		self.conn.commit()
 
 	def close_spider(self,crawler):
@@ -46,8 +47,9 @@ class MyItem(Item):
 class PhonePrices(Spider):
 	name = "price0"
 	start_urls = ["https://nigerianprice.com/slot-nigeria-price-list/"]
-	allowed    = ["nigerianprice.com"]
+	allowed_domains    = ["nigerianprice.com"]
 	custom_settings = {
+		"LOG_LEVEL":"ERROR",
 		"ITEM_PIPELINES":{
 			"phonePrice.MyPipeline":300
 		}

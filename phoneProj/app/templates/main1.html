@@ -11,10 +11,10 @@
 				</tr>	
 
 			</thead>
-			<tbody style="border: 1px solid white" style="font-size:10px;font-family:sans-serif;">
+			<tbody style="border: 1px solid white;font-size:10px;font-family:sans-serif;">
 				 {%for phone in phones%}
 					<tr class="bg text-white">
-                                        	<td>{{phone.phone[:-3]}}</td>
+                                        	<td>{{phone.phone}}</td>
 						<td>{{phone.price}}</td>
 					</tr>
                                 {%endfor%}
@@ -23,7 +23,7 @@
 			</tbody>			
 		</table>
 	</div>
-	<h3 class="text-center m-2 btn-outline-secondary text-white">Last Updated {{moment(last_update).format("LLL")}}</h3>
+	<h3 class="text-center m-2 btn-outline-secondary text-white">Last Update {{moment(last_update).format("LLL")}}</h3>
 
 	<hr class="m-1"></hr>
 	

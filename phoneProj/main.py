@@ -6,12 +6,13 @@ import coverage
 import sys
 from app.models import Prices
 
+
 COV = None
 if os.getenv("COVERAGE"):					#checking for COVERAGE setting and configures it properly 
 	COV = coverage.coverage(branch=True,include="app/*")
 
 app = create_app( os.getenv("APP_CONFIG") or "development" )
-migrate = Migrate(db,app)
+migrate = Migrate(app,db)
 
 @app.cli.command()
 @click.option("--coverage/--no-coverage",default=False,help="run test under test coverage")     #run test configure test coverage
@@ -31,4 +32,4 @@ def test(coverage):										 #command line COVERAGE
 
 @app.shell_context_processor
 def make_context():
-	return {"Price":Price,"db":db}
+	return {"Price":Prices,"db":db}

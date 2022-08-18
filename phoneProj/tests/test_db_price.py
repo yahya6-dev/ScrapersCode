@@ -16,7 +16,7 @@ class TestAppDB(unittest.TestCase):
 		self.ctx.pop()
 
 	def test_adding(self):
-		u = Prices(title="NOkia",price="1000")
+		u = Prices(phone="NOkia",price="1000")
 		db.session.add(u)
 		db.session.commit()
 		self.assertTrue(Prices.query.first() !=None)
